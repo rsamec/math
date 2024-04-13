@@ -32,7 +32,7 @@
             </header>
             <main>
                 <div class="container mt-2">
-                    <math-field class="col-12 mb-1" id="LatexInput"></math-field>
+                    <input type="text" class="col-12 mb-1" id="LatexInput"></input>
                     <br>
                     <button type="submit" id="SubmitButton" class="btn btn-primary">Submit</button>
                     <hr>
@@ -42,9 +42,26 @@
                 </div>
     </main>
     <script src="index.js"></script>
-    <script src="mathlive/dist/mathlive.min.js"></script>
     <script src="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/5.3.1/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/startup.min.js" async></script>
+    <script>
+        function populateInput() {
+          const queryString = window.location.search;
+          const urlParams = new URLSearchParams(queryString);
+          const inputValue = urlParams.get('q'); // Replace 'parameterName' with the name of your query parameter
+          const inputField = document.getElementById('LatexInput');
+    
+          if (inputValue) {
+            inputField.value = inputValue;
+            window.setTimeout(() => document.getElementById('SubmitButton').click(), 100);
+          } else {
+            alert('Parameter not found in the URL');
+          }
+        }
+    
+        // Call populateInput when the page loads
+        window.onload = populateInput;
+      </script>
 </body>
 
 </html>
